@@ -110,10 +110,7 @@ def get_link_to_post(links_df):
         (links_df["posted_indicator"] == 0)
     ].head(1)
             
-    if rel_link.empty == False:
-        return rel_link
-    else:
-        return None
+    return rel_link
 
 def update_posted_indicator(gsheet, links_df, rel_link):
     """
