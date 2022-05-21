@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 
 # load environment variables
 
-# load from dotenv file -- comment out in production
-load_dotenv()
+# # load from dotenv file -- comment out in production
+# load_dotenv()
 
 def create_google_sheets_api_key():
     """

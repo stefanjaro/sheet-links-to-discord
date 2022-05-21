@@ -12,8 +12,8 @@ from google_sheet_operations import (
 )
 # load environment variables
 
-# load from dotenv file -- comment out in production
-load_dotenv()
+# # load from dotenv file -- comment out in production
+# load_dotenv()
 
 # get all env vars
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
