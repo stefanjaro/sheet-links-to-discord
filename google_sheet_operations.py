@@ -12,40 +12,41 @@ from dotenv import load_dotenv
 # # load from dotenv file -- comment out in production
 # load_dotenv()
 
-def create_google_sheets_api_key():
-    """
-    Loads individual environment variables to form the google sheets API key
-    """
-    # get google sheets api key components
-    gsak_type = os.getenv("gsak_type")
-    gsak_project_id = os.getenv("gsak_project_id")
-    gsak_private_key_id = os.getenv("gsak_private_key_id")
-    gsak_private_key = os.getenv("gsak_private_key")
-    gsak_client_email = os.getenv("gsak_client_email")
-    gsak_client_id = os.getenv("gsak_client_id")
-    gsak_auth_uri = os.getenv("gsak_auth_uri")
-    gsak_token_uri = os.getenv("gsak_token_uri")
-    gsak_auth_provider_x509_cert_url = os.getenv("gsak_auth_provider_x509_cert_url")
-    gsak_client_x509_cert_url = os.getenv("gsak_client_x509_cert_url")
+# was used on local env, now deprecated
+# def create_google_sheets_api_key():
+#     """
+#     Loads individual environment variables to form the google sheets API key
+#     """
+#     # get google sheets api key components
+#     gsak_type = os.getenv("gsak_type")
+#     gsak_project_id = os.getenv("gsak_project_id")
+#     gsak_private_key_id = os.getenv("gsak_private_key_id")
+#     gsak_private_key = os.getenv("gsak_private_key")
+#     gsak_client_email = os.getenv("gsak_client_email")
+#     gsak_client_id = os.getenv("gsak_client_id")
+#     gsak_auth_uri = os.getenv("gsak_auth_uri")
+#     gsak_token_uri = os.getenv("gsak_token_uri")
+#     gsak_auth_provider_x509_cert_url = os.getenv("gsak_auth_provider_x509_cert_url")
+#     gsak_client_x509_cert_url = os.getenv("gsak_client_x509_cert_url")
 
-    # create google sheets service account key
-    GOOGLE_SHEETS_API_KEY = json.dumps({
-        "type": gsak_type,
-        "project_id": gsak_project_id,
-        "private_key_id": gsak_private_key_id,
-        "private_key": gsak_private_key,
-        "client_email": gsak_client_email,
-        "client_id": gsak_client_id,
-        "auth_uri": gsak_auth_uri,
-        "token_uri": gsak_token_uri,
-        "auth_provider_x509_cert_url": gsak_auth_provider_x509_cert_url,
-        "client_x509_cert_url": gsak_client_x509_cert_url
-    })
+#     # create google sheets service account key
+#     GOOGLE_SHEETS_API_KEY = json.dumps({
+#         "type": gsak_type,
+#         "project_id": gsak_project_id,
+#         "private_key_id": gsak_private_key_id,
+#         "private_key": gsak_private_key,
+#         "client_email": gsak_client_email,
+#         "client_id": gsak_client_id,
+#         "auth_uri": gsak_auth_uri,
+#         "token_uri": gsak_token_uri,
+#         "auth_provider_x509_cert_url": gsak_auth_provider_x509_cert_url,
+#         "client_x509_cert_url": gsak_client_x509_cert_url
+#     })
 
-    return GOOGLE_SHEETS_API_KEY
+#     return GOOGLE_SHEETS_API_KEY
 
-# set environment variable
-os.environ["GOOGLE_SHEETS_API_KEY"] = create_google_sheets_api_key()
+# # set environment variable
+# os.environ["GOOGLE_SHEETS_API_KEY"] = create_google_sheets_api_key()
 
 def load_google_sheet(serv_acc_env_var, file_name, tab_name):
     """
@@ -122,13 +123,3 @@ def update_posted_indicator(gsheet, links_df, rel_link):
 
     # write this to the google sheet
     write_to_google_sheet(gsheet, links_df)
-
-if __name__ == "__main__":
-    # load a google sheet
-    gsheet = load_google_sheet("GOOGLE_SHEETS_API_KEY", "Resources to Share with SLDE Discord", "Original")
-
-    # turn it into a pandas dataframe and set the right datatypes
-    links_df = convert_to_pandas_df(gsheet)
-
-    # get the link that needs to be posted
-    rel_link = get_link_to_post(links_df)
